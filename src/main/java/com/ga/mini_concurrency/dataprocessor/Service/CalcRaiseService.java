@@ -1,4 +1,4 @@
-package com.ga.mini_concurrency.dataprocessor.service;
+package com.ga.mini_concurrency.dataprocessor.Service;
 
 import com.ga.mini_concurrency.dataprocessor.Model.Employee;
 
@@ -22,7 +22,7 @@ public class CalcRaiseService {
         }
 
         if (employee.getCompletion() < MIN_COMPLETED){
-            System.out.println("No raisse gets applied. You must reach at least 60% of the completed projects");
+            System.out.println("No raise gets applied. You must reach at least 60% of the completed projects");
             return 0;
         }
 
