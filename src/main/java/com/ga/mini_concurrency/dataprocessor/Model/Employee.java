@@ -30,7 +30,7 @@ public class Employee {
         this.completion = completion;
     }
 
-    private void applyRaise(double raise){
+    public void applyRaise(double raise){
         raisePercentage = raise;
         raisedSalary = currentSalary + (currentSalary * raise);
     }
