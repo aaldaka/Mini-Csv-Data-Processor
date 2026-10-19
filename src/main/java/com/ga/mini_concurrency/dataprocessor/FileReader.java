@@ -7,6 +7,7 @@ import com.ga.mini_concurrency.dataprocessor.Model.Role;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class FileReader {
                 lineNumber++;
             }
         } catch (FileNotFoundException e) {
-            throw new FileNotFound("Can't find " + filePath);
+            throw new FileNotFound("Cannot find " + filePath);
         }
 
         return employees;
@@ -71,6 +72,39 @@ public class FileReader {
         }
 
         return new Employee(id, name, salary, joined, role, completed);
+    }
+
+    public static void updateSalaries(List<Employee> employees, String filePath) {
+        List<String> lines = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(new File(filePath))) { //read lines
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFound("Cannot find: " + filePath);
+        }
+
+        for (Employee employee : employees) {
+            for (int i = 0; i < lines.size(); i++) {
+                String[] parts = lines.get(i).split(",");
+
+                if (parts.length == 6 && parts[0].trim().equals(String.valueOf(employee.getId()))) {
+                    double newSalary = Math.round(employee.getRaisedSalary() * 100) / 100.0;
+                    parts[2] = String.valueOf(newSalary);     // salary col
+                    lines.set(i, String.join(",", parts));
+                    break;
+                }
+            }
+        }
+
+        try (PrintWriter writer = new PrintWriter(filePath)) {
+            for (String line : lines) {
+                writer.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFound("Cannot write to: " + filePath);
+        }
     }
 
 
