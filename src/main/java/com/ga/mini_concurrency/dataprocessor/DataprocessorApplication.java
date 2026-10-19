@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
@@ -30,10 +32,22 @@ public class DataprocessorApplication implements CommandLineRunner {
 
 			FileReader.updateSalaries(employees, CSV_FILE);
 
+			System.out.println();
 			System.out.println("===== Processing Complete! =======");
-			System.out.println(processor.getProcessedCount() + " employees have been processed.");
-			System.out.println(processor.getRaisedEmployees().size() + " employees got a raise.");
-			System.out.println("New salaries are updated in " + CSV_FILE);
+			System.out.println("On " + LocalDate.now() + " , " + processor.getProcessedCount() + " employees have been processed.");
+			System.out.println("Stats: " + processor.getRaisedEmployees().size() + " employees got a raise... ");
+
+			List<String> names = new ArrayList<>();
+			for (Employee employee : processor.getRaisedEmployees()) {
+				names.add(employee.getName());
+			}
+
+			for (int i = 0; i < names.size(); i += 8) {
+				int end = Math.min(i + 8, names.size());
+				System.out.println(names.subList(i, end));
+			}
+
+			System.out.println("You can view the updated salaries in " + CSV_FILE);
 		} catch (FileNotFound e) {
 			System.out.println(e.getMessage());
 		}
