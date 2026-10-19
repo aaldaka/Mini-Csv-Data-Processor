@@ -5,9 +5,11 @@ import com.ga.mini_concurrency.dataprocessor.Model.Employee;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class EmployeeProcessor {
+    private final Semaphore semaphore = new Semaphore(3);
 
     public void processAll(List<Employee> employees) {
         ExecutorService pool = Executors.newFixedThreadPool(6);
@@ -25,8 +27,16 @@ public class EmployeeProcessor {
     }
 
     private void processOne(Employee employee) {
-        double raise = CalcRaiseService.calculateRaise(employee);
-        employee.applyRaise(raise);
-        System.out.println(Thread.currentThread().getName() + "processed " + employee.getName() + " with a raise of: " + raise + "%");
+        try{
+            semaphore.acquire();
+
+            double raise = CalcRaiseService.calculateRaise(employee);
+            employee.applyRaise(raise);
+            System.out.println(Thread.currentThread().getName() + "processed " + employee.getName() + " with a raise of: " + raise + "%");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }finally {
+            semaphore.release();
+        }
     }
 }
