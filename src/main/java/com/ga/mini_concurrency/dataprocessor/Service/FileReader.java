@@ -77,7 +77,7 @@ public class FileReader {
     public static void updateSalaries(List<Employee> employees, String filePath) {
         List<String> lines = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File(filePath))) { //read lines
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
@@ -91,7 +91,7 @@ public class FileReader {
 
                 if (parts.length == 6 && parts[0].trim().equals(String.valueOf(employee.getId()))) {
                     double newSalary = Math.round(employee.getRaisedSalary() * 100) / 100.0;
-                    parts[2] = String.valueOf(newSalary);     // salary col
+                    parts[2] = String.valueOf(newSalary);
                     lines.set(i, String.join(",", parts));
                     break;
                 }

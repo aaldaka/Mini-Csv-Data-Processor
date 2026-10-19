@@ -1,6 +1,7 @@
 package com.ga.mini_concurrency.dataprocessor.Service;
 
 import com.ga.mini_concurrency.dataprocessor.Model.Employee;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class EmployeeProcessor {
     private final ReentrantLock lock = new ReentrantLock();
     private final AtomicInteger processedCount = new AtomicInteger();
 
+    @Getter
     private final List<Employee> raisedEmployees = new ArrayList<>();
 
 
@@ -66,10 +68,4 @@ public class EmployeeProcessor {
     public int getProcessedCount() {
         return processedCount.get();
     }
-
-    public List<Employee> getRaisedEmployees() {
-        return raisedEmployees;
-    }
-
-
 }

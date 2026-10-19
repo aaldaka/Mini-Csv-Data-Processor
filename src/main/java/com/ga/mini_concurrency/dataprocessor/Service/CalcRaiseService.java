@@ -18,7 +18,6 @@ public class CalcRaiseService {
     public static double calculateRaise(Employee employee) {
 
         if (employee.getCompletion() < MIN_COMPLETED){
-            System.out.println("No raise gets applied. You must reach at least 60% of the completed projects");
             return 0;
         }
 
@@ -32,6 +31,7 @@ public class CalcRaiseService {
         double roleRaise = employee.getRole().getRaisePercentage();
         double totalRaisePercentage = yearsRaise + roleRaise;
 
+        // bonus
         return employee.getCompletion() > BONUS_COMPLETED ? totalRaisePercentage = totalRaisePercentage * 1.5 : totalRaisePercentage;
     }
 }

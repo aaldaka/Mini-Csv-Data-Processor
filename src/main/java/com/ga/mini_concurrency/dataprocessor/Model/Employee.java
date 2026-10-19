@@ -22,7 +22,7 @@ public class Employee {
         this.id = id;
         this.name = name;
         this.currentSalary = currentSalary;
-        this.raisedSalary = currentSalary; // initially equal
+        this.raisedSalary = currentSalary;
         this.joinDate = joinDate;
         this.role = role;
         this.completion = completion;
