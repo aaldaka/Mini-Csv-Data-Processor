@@ -1,4 +1,4 @@
-package com.ga.mini_concurrency.dataprocessor;
+package com.ga.mini_concurrency.dataprocessor.Service;
 
 import com.ga.mini_concurrency.dataprocessor.Exception.FileNotFound;
 import com.ga.mini_concurrency.dataprocessor.Exception.InvalidData;
