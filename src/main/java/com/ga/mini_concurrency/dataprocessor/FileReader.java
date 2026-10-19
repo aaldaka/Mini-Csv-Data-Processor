@@ -39,5 +39,39 @@ public class FileReader {
         return employees;
     }
 
+    private static Employee parseLine(String line, int lineNumber) {
+        String[] parts = line.split(",");
+        if (parts.length != 6) {
+            throw new InvalidData("line " + lineNumber + " has missing columns");
+        }
+
+        int id;
+        String name;
+        double salary;
+        LocalDate joined;
+        Role role;
+        double completed;
+
+        try {
+            id = Integer.parseInt(parts[0].trim());
+            name = parts[1].trim();
+            salary = Double.parseDouble(parts[2].trim());
+            joined = LocalDate.parse(parts[3].trim());
+            role = Role.valueOf(parts[4].trim().toUpperCase());
+            completed = Double.parseDouble(parts[5].trim());
+        } catch (Exception e) {
+            throw new InvalidData("line " + lineNumber + ": " + e.getMessage());
+        }
+
+        if (salary < 0) {
+            throw new InvalidData("line " + lineNumber + ": salary can't be negative");
+        }
+        if (completed < 0 || completed > 1) {
+            throw new InvalidData("line " + lineNumber + ": projects completion ration must be between 0 and 1");
+        }
+
+        return new Employee(id, name, salary, joined, role, completed);
+    }
+
 
 }
