@@ -48,7 +48,7 @@ public class EmployeeProcessor {
 
             System.out.println(Thread.currentThread().getName() + " processed " + employee.getName() + " with a raise of: " + raise + "%");
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println(Thread.currentThread().getName()+ " was interrupted while processing " + employee.getName());
         }finally {
             semaphore.release();
         }
