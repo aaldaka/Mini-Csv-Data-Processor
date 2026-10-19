@@ -7,8 +7,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class Employee {
     private int id;
     private String name;
@@ -32,7 +30,7 @@ public class Employee {
 
     public void applyRaise(double raise){
         raisePercentage = raise;
-        raisedSalary = currentSalary + (currentSalary * raise);
+        raisedSalary = currentSalary + (currentSalary * raise / 100);
     }
 
 }
