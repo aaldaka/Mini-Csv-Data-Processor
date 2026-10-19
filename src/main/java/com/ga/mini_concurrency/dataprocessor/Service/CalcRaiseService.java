@@ -17,12 +17,12 @@ public class CalcRaiseService {
 
     public static double calculateRaise(Employee employee) {
 
-        if (yearsWorked(employee.getJoinDate()) < 1){
+        if (employee.getCompletion() < MIN_COMPLETED){
+            System.out.println("No raise gets applied. You must reach at least 60% of the completed projects");
             return 0;
         }
 
-        if (employee.getCompletion() < MIN_COMPLETED){
-            System.out.println("No raise gets applied. You must reach at least 60% of the completed projects");
+        if (yearsWorked(employee.getJoinDate()) < 1){
             return 0;
         }
 
