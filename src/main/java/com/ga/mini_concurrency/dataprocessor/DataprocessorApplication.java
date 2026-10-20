@@ -34,7 +34,7 @@ public class DataprocessorApplication implements CommandLineRunner {
 
 			System.out.println();
 			System.out.println("===== Processing Complete! =======");
-			System.out.println("On " + LocalDate.now() + " , " + processor.getProcessedCount() + " employees have been processed.");
+			System.out.println("On " + LocalDate.now() + ", " + processor.getProcessedCount() + " employees have been processed.");
 			System.out.println("Stats: " + processor.getRaisedEmployees().size() + " employees got a raise... ");
 
 			List<String> names = new ArrayList<>();
